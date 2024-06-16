@@ -1,0 +1,42 @@
+.TH treegen 1 "June 2024" "treegen 1.0.0" "User Commands"
+
+.SH NAME
+TreeGen \- Generate directory structure from text representation
+
+.SH SYNOPSIS
+.B treegen
+[OPTIONS] [\fISTDIN\fP|\fIFILE\fP...]
+
+.SH DESCRIPTION
+.B treegen
+reads a text representation of a directory tree and creates the corresponding directory structure. The input can be provided either through a file or standard input (stdin).
+
+.SH OPTIONS
+.TP
+.B \-\-help
+Show help message and exit.
+.TP
+.B \-\-version
+Show program version and exit.
+
+.SH USAGE
+.EX
+$ treegen tree_structure.txt
+$ cat tree_structure.txt | treegen
+$ treegen < tree_structure.txt
+$ treegen <<-EOF
+   ...
+EOF
+.EE
+
+.SH AUTHOR
+Written by The Artifex (4r7if3x)
+
+.SH COPYRIGHT
+Copyright (C) 2024 The Artifex (4r7if3x)
+
+.SH LICENSE
+GNU General Public License version 3 (GPLv3)
+
+.SH REPORTING BUGS
+Report bugs to <https://github.com/bilbilak/treegen/issues>

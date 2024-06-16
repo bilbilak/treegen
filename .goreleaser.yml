@@ -1,0 +1,27 @@
+builds:
+  -
+    goos:
+      - windows
+      - darwin
+      - linux
+      - freebsd
+
+archives:
+  -
+    format: binary
+
+nfpms:
+  -
+    license: GPL-3.0
+    vendor: Bilbilak
+    maintainer: The Artifex (4r7if3x)
+    homepage: https://github.com/bilbilak/treegen
+    description: |
+      ASCII Tree to Directory and File Structure Generator
+    section: utils
+    formats:
+      - deb
+      - rpm
+    contents:
+      - src: treegen.1
+        dst: /usr/local/share/man/man1/
