@@ -28,6 +28,10 @@
 
 **_TreeGen_** is a powerful Command Line Interface (CLI) tool designed to simplify the process of creating complex directory structures. It allows users to generate an entire file and folder structure from an ASCII tree representation. This can be incredibly useful for quickly setting up projects or replicating folder structures.
 
+## 📚 Documentation
+
+For detailed information on **_TreeGen_** installation and usage instructions, please refer to the project's [Wiki](https://github.com/bilbilak/treegen/wiki). The Wiki provides comprehensive guides and resources to help you get started with **_TreeGen_** and make the most out of its features. Additionally, you can find answers to the most frequently asked questions (FAQs) in the Wiki.
+
 ## 👥 Support
 
 If you need assistance or have any questions regarding **_TreeGen_**, please refer to the [Support Policy](https://github.com/bilbilak/treegen/blob/main/docs/SUPPORT.md) for information on how to get help. We also welcome suggestions and ideas for new features or improvements.

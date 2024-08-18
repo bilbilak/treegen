@@ -4,10 +4,6 @@ We're happy to help you with any questions or issues you may have regarding our 
 
 To ensure a welcoming and inclusive environment for all participants, we expect everyone to adhere to our [Code of Conduct](https://github.com/bilbilak/treegen?tab=coc-ov-file#readme) when interacting with our community.
 
-## 📚 Documentation
-
-For detailed information on **_TreeGen_** installation and usage instructions, please refer to the project's [Wiki](https://github.com/bilbilak/treegen/wiki). The Wiki provides comprehensive guides and resources to help you get started with **_TreeGen_** and make the most out of its features. Additionally, you can find answers to the most frequently asked questions (FAQs) in the Wiki.
-
 ## ❓ Questions and Answers (Q&A)
 
 For general questions and discussions, please use the [Discussion Board](https://github.com/bilbilak/treegen/discussions/categories/q-a) of the project. This platform allows you to engage in conversations with the maintainers and other contributors, to ask your questions and participate in the polls.
