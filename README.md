@@ -28,6 +28,32 @@
 
 **_Treegen_** is a powerful Command Line Interface (CLI) tool designed to simplify the process of creating complex directory structures. It allows users to generate an entire file and folder structure from an ASCII tree representation. This can be incredibly useful for quickly setting up project structures or replicating folder structures.
 
+## ⬇️ Download
+The easiest way to install treegen is using `go install`.
+
+    go install github.com/bilbilak/treegen
+
+## 🛠️ Usage
+
+```sh
+# To generate a file structure you need to pass an ASCII representation of the file structure
+
+## From a file
+treegen tree_structure.txt
+
+## From stdin using redirections
+cat tree_structure.txt | treegen
+
+treegen < tree_structure.txt
+
+treegen <<-EOF
+  /path/to/project/
+  ├── src/
+  │   └── main.js
+  ├── LICENSE.md
+  └── README.md
+EOF
+```
 ## 👥 Support
 
 If you need assistance or have any questions regarding **_Treegen_**, please refer to the [Support Policy](https://github.com/bilbilak/treegen/blob/main/docs/SUPPORT.md) for information on how to get help. We also welcome suggestions and ideas for new features or improvements.
