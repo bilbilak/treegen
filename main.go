@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"flag"
 	"fmt"
 	"io"
@@ -10,7 +11,7 @@ import (
 )
 
 const (
-	version     = "1.0.0"
+	version     = "1.0.2"
 	bold        = "\033[1m"
 	reset       = "\033[0m"
 	gap         = "    "
@@ -41,14 +42,28 @@ func main() {
 		return
 	}
 
+	var content string
+	var err error
 	if flag.NArg() > 0 {
 		for _, path := range flag.Args() {
-			content := readFromFile(path)
-			generate(content)
+			content, err = readFromFile(path)
+			if err != nil {
+				fmt.Fprint(os.Stderr, err.Error())
+				os.Exit(1)
+			}
 		}
 	} else {
-		content := readFromStdIn()
-		generate(content)
+		content, err = readFromStdIn()
+		if err != nil {
+			fmt.Fprint(os.Stderr, err.Error())
+			os.Exit(1)
+		}
+	}
+
+	err = generate(content)
+	if err != nil {
+		fmt.Fprint(os.Stderr, err.Error())
+		os.Exit(1)
 	}
 }
 
@@ -66,45 +81,50 @@ func helpMessage() {
 	fmt.Println("\tEOF\n")
 }
 
-func readFromFile(path string) string {
+func readFromFile(path string) (string, error) {
 	file, err := os.Open(path)
-
 	if err != nil {
-		fmt.Println("File not found:", path)
-		os.Exit(1)
+		return "", err
 	}
 
 	content, err := io.ReadAll(file)
+	defer file.Close() // defer is more idomatic
 
 	if err != nil {
-		fmt.Println("File not readable:", path)
-		os.Exit(1)
+		return "", err
 	}
 
-	_ = file.Close()
-
-	return string(content)
+	return string(content), nil
 }
 
-func readFromStdIn() string {
-	stat, _ := os.Stdin.Stat()
+func readFromStdIn() (string, error) {
+	stat, err := os.Stdin.Stat()
+	if err != nil {
+		return "", err
+	}
 
 	if (stat.Mode() & os.ModeCharDevice) != 0 {
 		helpMessage()
-		os.Exit(2)
+		return "", errors.New("")
 	}
 
-	content, _ := io.ReadAll(os.Stdin)
+	content, err := io.ReadAll(os.Stdin)
+	if err != nil {
+		return "", err
+	}
 
-	return string(content)
+	return string(content), nil
 }
 
-func generate(tree string) {
+func generate(tree string) error {
 	lines := strings.Split(tree, "\n")
 	level := 0
 
 	dir := lines[0]
-	createDirectory(dir)
+	err := createDirectory(dir)
+	if err != nil {
+		return err
+	}
 
 	for i, line := range lines[1:] {
 		currentLevel := nodeLevel(line)
@@ -123,13 +143,26 @@ func generate(tree string) {
 		nodePath := dir + nodeName(line)
 
 		if strings.HasSuffix(nodePath, "/") {
-			createDirectory(nodePath)
-		} else {
-			createFile(nodePath)
+			err := createDirectory(nodePath)
+			if err != nil {
+				// we're in a loop here, so we should probably clean up whatever
+				// stuff got created if one of these pops
+				return err
+			}
+			continue
+		}
+
+		err := createFile(nodePath)
+		if err != nil {
+			// we're in a loop here, so we should probably clean up whatever
+			// stuff got created if one of these pops
+			return err
 		}
 	}
 
 	fmt.Println("Directory structure created successfully")
+
+	return nil
 }
 
 func nodeLevel(line string) int {
@@ -165,22 +198,13 @@ func moveUpDirectories(path string, n int) string {
 	return path
 }
 
-func createDirectory(path string) {
-	err := os.MkdirAll(path, 0755)
-
-	if err != nil {
-		fmt.Println("Directory not created:", path)
-		os.Exit(1)
-	}
+func createDirectory(path string) error {
+	return os.MkdirAll(path, 0755)
 }
 
-func createFile(path string) {
+func createFile(path string) error {
 	file, err := os.Create(path)
+	defer file.Close()
 
-	if err != nil {
-		fmt.Println("File not created:", path)
-		os.Exit(1)
-	}
-
-	_ = file.Close()
+	return err
 }
