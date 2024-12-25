@@ -4,4 +4,4 @@ Welcome to the Brand Guidelines for **TreeGen™**. This document provides an ov
 
 <br>
 
-If you have any questions or need further guidance, please contact our brand team at [media@bilbilak.org](mailto:media@bilbilak.org)
+If you have any questions or need further guidance, please contact our brand team at [media@bilbilak.dev](mailto:media@bilbilak.dev)
