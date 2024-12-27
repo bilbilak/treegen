@@ -1,0 +1,78 @@
+.TH TREEGEN 1 "December 2024" "Version 1.1" "TreeGen Manual"
+.SH NAME
+TreeGen - ASCII Tree Directory and File Structure Generator
+.SH SYNOPSIS
+.B treegen
+[options] | [FILE]... [STDIN]
+.SH DESCRIPTION
+TreeGen is a powerful Command Line Interface (CLI) tool designed to simplify the process of creating complex directory structures. It allows users to generate an entire file and folder structure from an ASCII tree representation. This can be incredibly useful for quickly setting up projects or replicating folder structures.
+
+.SH OPTIONS
+.TP
+.B -f, --force
+Overwrite existing files.
+.TP
+.B -v, --verbose
+Enable verbose output.
+.TP
+.B --version
+Display the installed version number.
+.TP
+.B --license
+Display the license name.
+.TP
+.B --help
+Show usage instructions of treegen or its commands.
+
+.SH EXAMPLES
+.PP
+Load tree structures from files:
+.PP
+.EX
+.B treegen tree1.txt tree2.txt
+.EE
+.PP
+Load tree structures from the output of other commands:
+.PP
+.EX
+.B cat tree.txt | treegen
+.EE
+.PP
+Load tree structures from input redirection:
+.PP
+.EX
+.B treegen < tree.txt
+.EE
+.PP
+Load tree structures from both file and heredoc:
+.PP
+.EX
+.B treegen tree.txt <<-EOF
+.B 	...
+.B EOF
+.EE
+
+.SH EXIT STATUS
+.TP
+.B 0
+Success.
+.TP
+.B 1
+General error.
+.TP
+.B 2
+Invalid arguments or wrong syntax.
+
+.SH AUTHOR
+Written by The Artifex (4r7if3x).
+
+.SH REPORTING BUGS
+Report bugs to https://github.com/bilbilak/treegen/issues.
+
+.SH COPYRIGHT
+Copyright © 2024 The Artifex (4r7if3x)
+
+Licensed under General Public License version 3 (GPLv3)
+
+.SH SEE ALSO
+.BR ls (1), tree (1), find (1), mkdir (1), touch (1)
