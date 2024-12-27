@@ -37,7 +37,11 @@ var rootCmd = &cobra.Command{
 			return
 		}
 
-		internal.Help()
+		processed := internal.ProcessInput(args)
+
+		if !processed {
+			internal.Help()
+		}
 	},
 }
 
